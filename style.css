@@ -1,0 +1,6 @@
+.editor-parent > div:first-child {
+    overflow: hidden;
+    resize: both;
+    height: 240px;
+    max-width: 100%;
+}
