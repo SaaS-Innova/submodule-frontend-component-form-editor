@@ -38,7 +38,7 @@ export const EditorField = (props: IFormProps) => {
    * and set the height of the editor content accordingly
    */
   useEffect(() => {
-    const observer = new MutationObserver((mutationsList, observer) => {
+    const observer = new MutationObserver((_mutationsList, observer) => {
       const header = document.querySelector(".ql-toolbar");
       if (header) {
         const resizeObserver = new ResizeObserver((entries) => {
