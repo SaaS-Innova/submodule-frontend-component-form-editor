@@ -9,8 +9,10 @@ import ImageResize from "quill-image-resize-module-react";
 import Quill from "quill";
 import { useState, useEffect } from "react";
 import "./style.css";
+import DividerBlot from "./format/dividerBlot";
 
 Quill.register("modules/imageResize", ImageResize);
+Quill.register(DividerBlot);
 
 export const EditorField = (props: IFormProps) => {
   const { attribute, form, fieldType } = props;
@@ -124,7 +126,7 @@ export const EditorField = (props: IFormProps) => {
                     ["bold", "italic", "underline"],
                     [{ color: [] }, { background: [] }],
                     [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
-                    ["image", "code-block", "link"],
+                    ["image", "code-block", "link", "blockquote"],
                     ["clean"],
                   ],
                   imageResize: {
