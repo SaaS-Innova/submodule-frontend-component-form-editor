@@ -108,7 +108,7 @@ export const EditorField = (props: IFormProps) => {
             return (
               <Editor
                 id={attribute}
-                value={editorValue || field.value || ""}
+                value={editorValue ?? (field.value || "")}
                 style={{
                   width: "100%",
                   height: `calc(100% - ${headerHeight + "px"})`,
