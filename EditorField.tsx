@@ -92,7 +92,9 @@ export const EditorField = (props: IFormProps) => {
   const { labelClassName, fieldClassName, divClassName } = getClassNames();
   const labelElement = (
     <label htmlFor={attribute} className={labelClassName}>
-      {label} {required && "*"}
+      <span className="capitalize-first">
+        {label} {required && "*"}
+      </span>
     </label>
   );
 
