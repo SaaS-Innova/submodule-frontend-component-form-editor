@@ -18,7 +18,7 @@ export const EditorField = (props: IFormProps) => {
   const { attribute, form, fieldType } = props;
   const { label } = form[attribute];
   const { required } = form[attribute].rules;
-  const [editorValue, setEditorValue] = useState<string | null>("");
+  const [editorValue, setEditorValue] = useState<string | null>(null);
   const [headerHeight, setHeaderHeight] = useState(42);
 
   const {
@@ -31,7 +31,7 @@ export const EditorField = (props: IFormProps) => {
    * based on the default value provided in the form
    */
   useEffect(() => {
-    const initialValue = defaultValues?.[attribute] ?? "";
+    const initialValue = defaultValues?.[attribute] ?? null;
     setEditorValue(initialValue);
   }, [attribute, defaultValues]);
 
@@ -110,7 +110,7 @@ export const EditorField = (props: IFormProps) => {
             return (
               <Editor
                 id={attribute}
-                value={editorValue || field.value || ""}
+                value={editorValue ?? field.value ?? null}
                 style={{
                   width: "100%",
                   height: `calc(100% - ${headerHeight + "px"})`,
@@ -138,7 +138,7 @@ export const EditorField = (props: IFormProps) => {
                       border: "none",
                       color: "white",
                     },
-                    modules: ["Resize", "DisplaySize", "Toolbar"],
+                    modules: ["Resize", "DisplaySize"],
                   },
                 }}
               />
