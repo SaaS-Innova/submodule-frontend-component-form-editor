@@ -7,7 +7,7 @@ import { FormFieldError } from "../formFieldError/FormFieldError";
 //@ts-ignore
 import ImageResize from "quill-image-resize-module-react";
 import Quill from "quill";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./style.css";
 import DividerBlot from "./format/dividerBlot";
 
@@ -66,30 +66,24 @@ export const EditorField = (props: IFormProps) => {
     };
   }, [document.querySelector(".ql-toolbar")]);
 
-  const getClassNames = () => {
-    let labelClassName = "";
-    let fieldClassName = "";
-    let divClassName = "";
+  const { labelClassName, fieldClassName, divClassName } = useMemo(() => {
     switch (fieldType) {
       case IFormFieldType.NO_LABEL:
-        labelClassName = "";
-        fieldClassName = "field p-fluid";
-        divClassName = "editor-parent";
-        break;
       case IFormFieldType.TOP_LABEL:
-        labelClassName = "";
-        fieldClassName = "field p-fluid";
-        divClassName = "editor-parent";
-        break;
+        return {
+          labelClassName: "",
+          fieldClassName: "field p-fluid",
+          divClassName: "editor-parent",
+        };
       default:
-        labelClassName = "col-12 mb-3 md:col-3 md:mb-0";
-        fieldClassName = "field grid";
-        divClassName = "col-12 md:col-9 relative editor-parent";
-        break;
+        return {
+          labelClassName: "col-12 mb-3 md:col-3 md:mb-0",
+          fieldClassName: "field grid",
+          divClassName: "col-12 md:col-9 relative editor-parent",
+        };
     }
-    return { labelClassName, fieldClassName, divClassName };
-  };
-  const { labelClassName, fieldClassName, divClassName } = getClassNames();
+  }, [fieldType]);
+
   const labelElement = (
     <label htmlFor={attribute} className={labelClassName}>
       <span className="capitalize-first">
