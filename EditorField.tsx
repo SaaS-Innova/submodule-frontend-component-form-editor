@@ -15,7 +15,20 @@ Quill.register("modules/imageResize", ImageResize);
 Quill.register(DividerBlot);
 
 export const EditorField = (props: IFormProps) => {
-  const { attribute, form, fieldType } = props;
+  const {
+    attribute,
+    form,
+    fieldType,
+    customToolBar = [
+      [{ size: ["small", false, "large", "huge"] }],
+      [{ font: [] }],
+      ["bold", "italic", "underline"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
+      ["image", "code-block", "link", "blockquote"],
+      ["clean"],
+    ],
+  } = props;
   const { label } = form[attribute];
   const { required } = form[attribute].rules;
   const [editorValue, setEditorValue] = useState<string | null>(null);
@@ -116,15 +129,7 @@ export const EditorField = (props: IFormProps) => {
                 showHeader={false}
                 className={`${errors[attribute] ? "p-invalid" : ""}`}
                 modules={{
-                  toolbar: [
-                    [{ size: ["small", false, "large", "huge"] }],
-                    [{ font: [] }],
-                    ["bold", "italic", "underline"],
-                    [{ color: [] }, { background: [] }],
-                    [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
-                    ["image", "code-block", "link", "blockquote"],
-                    ["clean"],
-                  ],
+                  toolbar: customToolBar,
                   imageResize: {
                     parchment: Quill.import("parchment"),
                     displayStyles: {
