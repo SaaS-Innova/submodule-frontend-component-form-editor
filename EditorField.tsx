@@ -35,9 +35,17 @@ export const EditorField = (props: IFormProps) => {
   const [headerHeight, setHeaderHeight] = useState(42);
 
   const {
-    formState: { errors, defaultValues },
+    formState: { errors, defaultValues, dirtyFields },
     control,
+    getValues,
   } = useFormContext();
+
+  useEffect(() => {
+    if (dirtyFields?.[attribute] && !editorValue) {
+      const value = getValues(attribute);
+      setEditorValue(value);
+    }
+  }, [dirtyFields?.[attribute]]);
 
   /*
    * This useEffect is used to set the initial value of the editor
